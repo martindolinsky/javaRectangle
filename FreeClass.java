@@ -1,6 +1,6 @@
 package sk.itsovy.dolinsky.other;
 
-import java.sql.SQLOutput;
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -740,7 +740,6 @@ public class FreeClass {
 
         int l = (rnd.nextInt(9000)+1000); //1000;9999 9999 - 1000 + 1 = 9000 + 1000
 
-
         int prime;
         int div;
 
@@ -752,13 +751,16 @@ public class FreeClass {
                 if (prime % i == 0) {
                     div ++;
                 }
-
             }
         } while (div > 0);
         System.out.println(prime);
-
         System.out.println();
+    }
 
+    // Display how many correct and incorrect answers you had and how long did it take
+    public void Captcha() {
+        Scanner sc = new Scanner(System.in);
+        Random rnd = new Random();
         System.out.println("Captcha");
         System.out.println("Enter your name");
         String name = sc.nextLine();
@@ -767,6 +769,8 @@ public class FreeClass {
         int correctAnswers = 0;
         int incorrectAnswers = 0;
 
+        Date start = new Date();
+        long startTime = start.getTime();
         for (int i = 1; i <= 10; i++) {
             System.out.println(i+ ".task");
             int m = rnd.nextInt(90) + 10;
@@ -788,7 +792,6 @@ public class FreeClass {
 
             o = sc.nextInt();
 
-
             if ((p == 0 && o == (m+n)) || (p == 1 && o ==(m+n)) || (p == 2 && o == (m - n)) || (p == 3 && o == (m*n))) {
                 System.out.println("Correct.");
                 correctAnswers++;
@@ -797,13 +800,23 @@ public class FreeClass {
                 System.out.println("Incorrect.");
                 incorrectAnswers++;
             }
-
         }
+        Date end = new Date();
+        long endTime = end.getTime();
+        long resultTimes = endTime - startTime;
+        long minutes = 0;
+        long seconds = 0;
+        System.out.println(end.getTime());
         System.out.println("Correct answers: " + correctAnswers + " Incorrect answers: " + incorrectAnswers);
-
-
-
-
+        resultTimes = resultTimes/1000L;
+        if (resultTimes >= 60L) {
+            minutes++;
+            seconds = resultTimes - 60L;
+        }
+        else {
+            seconds = resultTimes;
+        }
+        System.out.println("Minutes: " + minutes + " Seconds: " + seconds);
 
     }
 
